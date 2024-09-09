@@ -1,6 +1,7 @@
+import os
 import re
-import pandas as pd
 import csv
+import pandas as pd
 
 
 def replace_symbol(string):
@@ -50,4 +51,28 @@ def remove_duplicates_from_column(data, index):
 def find_numbers(text):
     numbers = re.findall(r"[-+]?\d+\.\d+|\d+", text)
     return numbers
+
+
+def data_to_csv(data, current_dir, name_of_csv_file, url):
+    with open(fr"{current_dir}\{name_of_csv_file}_{url[-1]}.csv",
+              mode="w", newline="", encoding="utf-8") as file:
+        writer = csv.writer(file)
+        for row in data:
+            writer.writerow(row)
+
+
+def check_empty_files(directory):
+    empty_files = []
+    files = os.listdir(directory)
+    for file in files:
+        with open(os.path.join(directory, file),
+                  mode="r", encoding="utf-8") as csv_file:
+            csv_reader = csv.reader(csv_file)
+            rows = list(csv_reader)
+            if len(rows) == 0:
+                empty_files.append(file.split(".")[0][-1])
+            else:
+                print("[+] file not empty")
+
+    return empty_files
 

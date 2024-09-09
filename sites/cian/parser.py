@@ -4,41 +4,14 @@ import csv
 import asyncio
 import threading
 from bs4 import BeautifulSoup
-from seleniumwire import webdriver
-# from selenium import webdriver
-from webdriver_manager.chrome import ChromeDriverManager
-from selenium.webdriver.chrome.service import Service
-from fake_useragent import UserAgent
-from proxies.fake_proxy import FakeProxy
 from sites.cian.config import ADDRESS, REGION
 from sites.cian.html_scraping import Critical, Additional
-
-
-def create_driver(proxy=False):
-    # Chrome driver options:
-    options = webdriver.ChromeOptions()
-    # fake User-agent:
-    user_agent = UserAgent().random
-    # add options user-agent:
-    options.add_argument(f"user-agent={user_agent}")
-    # Chrome web-driver:
-    if not proxy:
-        driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()),
-                                  options=options)
-    else:
-        driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()),
-                                  options=options, seleniumwire_options=FakeProxy().get_fake_proxy())
-
-    return driver
-
-
-def get_requests(driver, url):
-    driver.get(url)
-    driver.implicitly_wait(10)
+from webdriver.driver import create_driver, get_requests
 
 
 def get_paginator(driver, url):
     get_requests(driver=driver, url=url)
+    time.sleep(15)
     html = driver.page_source
     soup = BeautifulSoup(html, "html.parser")
     paginator = soup.find("ul", attrs={"class": "_32bbee5fda--list--G2FoV"})
@@ -121,6 +94,6 @@ class CianParser:
             thread.join()
 
 
-parser = CianParser()
-parser.start_parse()
+'''parser = CianParser()
+parser.start_parse()'''
 

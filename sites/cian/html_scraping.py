@@ -22,9 +22,9 @@ class Critical:
             self.elements.append(None)
 
     async def get_price(self):
-        content = self.soup.find("span", attrs={"class": "a10a3f92e9--color_black_100--Ephi7 a10a3f92e9--lineHeight_5u--e6Sug a10a3f92e9--fontWeight_normal--JEG_c a10a3f92e9--fontSize_14px--reQMB a10a3f92e9--display_block--KYb25 a10a3f92e9--text--e4SBY a10a3f92e9--text_letterSpacing__0--cQxU5 a10a3f92e9--text_whiteSpace__nowrap--hJYYl"})
-        price = find_numbers(content.text.replace(" ", "")[0])
-        self.elements.append(int(price))
+        content = self.soup.find_all("span", attrs={"class": "a10a3f92e9--color_black_100--Ephi7 a10a3f92e9--lineHeight_5u--e6Sug a10a3f92e9--fontWeight_normal--JEG_c a10a3f92e9--fontSize_14px--reQMB a10a3f92e9--display_block--KYb25 a10a3f92e9--text--e4SBY a10a3f92e9--text_letterSpacing__0--cQxU5 a10a3f92e9--text_whiteSpace__nowrap--hJYYl"})
+        price = find_numbers(content[1].text.replace(" ", ""))
+        self.elements.append(int(price[0]))
 
     async def get_area(self):
         try:

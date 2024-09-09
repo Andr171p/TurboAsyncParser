@@ -4,13 +4,28 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4ff740c3-3b95-4364-b98f-9151a662e006" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="4ff740c3-3b95-4364-b98f-9151a662e006" name="Changes" comment="turbo-async-parser">
+      <change afterPath="$PROJECT_DIR$/avito/get.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/avito/pool.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/avito/source/data/ads.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/avito/source/data/page.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/avito/source/html.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/manage/run.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/parser.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/schemas/ads_schemas.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/session.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/settings/data.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/settings/logs.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/settings/network.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/settings/page.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sites/sova/config.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sites/sova/html_scraping.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sites/sova/parser.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/source.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/utils.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/webdriver/driver.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/PostgreSQL/db_auth_data.py" beforeDir="false" afterPath="$PROJECT_DIR$/database/PostgreSQL/db_auth_data.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/database/PostgreSQL/db_connect.py" beforeDir="false" afterPath="$PROJECT_DIR$/database/PostgreSQL/db_connect.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proxies/fake_proxy.py" beforeDir="false" afterPath="$PROJECT_DIR$/proxies/fake_proxy.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proxies/proxy_auth.py" beforeDir="false" afterPath="$PROJECT_DIR$/proxies/proxy_auth.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sites/avito/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/sites/avito/config.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sites/avito/html_scraping.py" beforeDir="false" afterPath="$PROJECT_DIR$/sites/avito/html_scraping.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sites/avito/parser.py" beforeDir="false" afterPath="$PROJECT_DIR$/sites/avito/parser.py" afterDir="false" />
@@ -18,7 +33,6 @@
       <change beforePath="$PROJECT_DIR$/sites/cian/html_scraping.py" beforeDir="false" afterPath="$PROJECT_DIR$/sites/cian/html_scraping.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sites/cian/parser.py" beforeDir="false" afterPath="$PROJECT_DIR$/sites/cian/parser.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/parse_dates.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/parse_dates.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/utils/preprocessing_data.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/preprocessing_data.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -36,6 +50,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;Andr171p&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/Andr171p/TurboAsyncParser.git&quot;,
+    &quot;accountId&quot;: &quot;7414caab-e221-4c0c-a921-3f5c2dccf18f&quot;
+  }
+}</component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 4
 }</component>
@@ -47,16 +73,23 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Python tests.Python tests in chrome_driver.py.executor": "Run",
+    "Python.chrome_driver.executor": "Run",
     "Python.config (1).executor": "Run",
     "Python.config.executor": "Run",
     "Python.db_connect.executor": "Run",
+    "Python.html_scraping.executor": "Run",
     "Python.parser (1).executor": "Run",
+    "Python.parser (2).executor": "Run",
     "Python.parser.executor": "Run",
+    "Python.pool.executor": "Run",
+    "Python.run.executor": "Run",
     "Python.test.executor": "Run",
+    "Python.utils.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "main",
-    "last_opened_file_path": "C:/Users/andre/TyuiuProjectParser/TurboAsyncParser/proxies"
+    "last_opened_file_path": "C:/Users/andre/GiGaTeleBot"
   }
 }]]></component>
   <component name="RecentsManager">
@@ -69,29 +102,7 @@
       <recent name="C:\Users\andre\TyuiuProjectParser\TurboAsyncParser\data\avito\pages" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.db_connect">
-    <configuration name="config (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="TurboAsyncParser" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/sites/cian" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/sites/cian/config.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
+  <component name="RunManager" selected="Python.pool">
     <configuration name="db_connect" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="TurboAsyncParser" />
       <option name="ENV_FILES" value="" />
@@ -114,7 +125,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="parser (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="parser (2)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="TurboAsyncParser" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -123,11 +134,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/sites/cian" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/sites/sova" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/sites/cian/parser.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/sites/sova/parser.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -158,7 +169,29 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="test" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="pool" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="TurboAsyncParser" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/avito" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/avito/pool.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="utils" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="TurboAsyncParser" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -171,7 +204,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/test.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/utils.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -182,18 +215,18 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.db_connect" />
-        <item itemvalue="Python.parser (1)" />
-        <item itemvalue="Python.test" />
-        <item itemvalue="Python.config (1)" />
+        <item itemvalue="Python.pool" />
+        <item itemvalue="Python.utils" />
         <item itemvalue="Python.parser" />
+        <item itemvalue="Python.db_connect" />
+        <item itemvalue="Python.parser (2)" />
       </list>
     </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-python-sdk-09665e90c3a7-d3b881c8e49f-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-233.15026.15" />
+        <option value="bundled-python-sdk-babbdf50b680-746f403e7f0c-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-241.15989.155" />
       </set>
     </attachedChunks>
   </component>
@@ -206,6 +239,19 @@
       <option name="presentableId" value="Default" />
       <updated>1714392390214</updated>
     </task>
+    <task id="LOCAL-00001" summary="turbo-async-parser">
+      <option name="closed" value="true" />
+      <created>1715544977898</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1715544977898</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="turbo-async-parser" />
+    <option name="LAST_COMMIT_MESSAGE" value="turbo-async-parser" />
   </component>
 </project>

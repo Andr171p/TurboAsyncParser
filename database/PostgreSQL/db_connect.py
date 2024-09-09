@@ -1,27 +1,41 @@
 import os
 import csv
+import time
 import psycopg2
 from datetime import datetime
+from utils.preprocessing_data import remove_duplicates_from_column, drop_none
 from database.PostgreSQL.db_auth_data import host, user, password, db_name, port
 
 
-def csv_to_array():
-    array = []
-    directory = r"C:\Users\andre\TyuiuProjectParser\TurboAsyncParser\data\avito\pages\selhoznaznacheniya"
+def csv_to_array(directory):
+    files = []
+    data = []
+    # directory = r"C:\Users\andre\TyuiuProjectParser\TurboAsyncParser\data\avito\pages\selhoznaznacheniya"
     for filename in os.listdir(directory):
-        with open(os.path.join(directory, filename),
+        files.append(filename)
+    for i in range(len(files)):
+        with open(os.path.join(directory, files[i]),
                   "r", encoding="utf-8") as file:
             reader = csv.reader(file)
             for row in reader:
-                array.append(row)
-        return array
+                data.append(row)
+
+    return data
 
 
 def convert_data(data):
     for row in data:
         row[1] = int(row[1])
-        row[2] = float(row[2])
-        row[4] = datetime.strptime(row[4], '%Y-%m-%d').date()
+        try:
+            row[2] = float(row[2])
+        except Exception as _ex:
+            print(_ex)
+            row[2] = None
+        try:
+            row[4] = datetime.strptime(row[4], '%Y-%m-%d').date()
+        except Exception as _ex:
+            print(_ex)
+            row[4] = datetime.strptime(row[4], '%Y-%m-%d %H:%M:%S').date()
     return data
 
 
@@ -51,8 +65,28 @@ def db_connect(data_parser):
             print("[INFO] PostgresSQL connection closed")
 
 
-d = csv_to_array()
-d = convert_data(d)
-print(d)
-print(len(d))
-db_connect(d)
+def data_upload(timeout=15):
+    dir_list = [
+        r"C:\Users\andre\TyuiuProjectParser\TurboAsyncParser\data\sova\pages\kommercheskaya",
+        r"C:\Users\andre\TyuiuProjectParser\TurboAsyncParser\data\sova\pages\uchastok"
+    ]
+    for directory in dir_list:
+        data = csv_to_array(directory=directory)
+        data = convert_data(data=data)
+        data = drop_none(data=data)
+        data = remove_duplicates_from_column(
+            data=data,
+            index=5
+        )
+        print(len(data))
+        db_connect(data_parser=data)
+        time.sleep(timeout)
+
+
+def main():
+    data_upload()
+
+
+if __name__ == "__main__":
+    main()
+

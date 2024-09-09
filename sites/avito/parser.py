@@ -3,42 +3,18 @@ import time
 import csv
 import asyncio
 from bs4 import BeautifulSoup
-from seleniumwire import webdriver
-# from selenium import webdriver
-from webdriver_manager.chrome import ChromeDriverManager
-from selenium.webdriver.chrome.service import Service
-from fake_useragent import UserAgent
-from sites.avito.config import AVITO_URLS
 import threading
+from sites.avito.config import filter
 from sites.avito.html_scraping import Critical, Additional
-from proxies.fake_proxy import FakeProxy
+from webdriver.driver import create_driver, get_requests
+from utils.preprocessing_data import check_empty_files
 
-
-def create_driver(proxy=False):
-    # Chrome driver options:
-    options = webdriver.ChromeOptions()
-    # fake User-agent:
-    user_agent = UserAgent().random
-    # add options user-agent:
-    options.add_argument(f"user-agent={user_agent}")
-    # Chrome web-driver:
-    if not proxy:
-        driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()),
-                                  options=options)
-    else:
-        driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()),
-                                  options=options, seleniumwire_options=FakeProxy().get_fake_proxy())
-
-    return driver
-
-
-def get_requests(driver, url):
-    driver.get(url)
-    driver.implicitly_wait(10)
+from sites.avito.config import AVITO_URLS
 
 
 def get_paginator(driver, url):
     get_requests(driver=driver, url=url)
+    time.sleep(10)
     html = driver.page_source
     soup = BeautifulSoup(html, "html.parser")
     paginator = soup.find("li", attrs={"class": "styles-module-listItem-MKpTZ styles-module-listItem_last-RzX6e styles-module-listItem_notFirst-eZHpD"})
@@ -46,7 +22,7 @@ def get_paginator(driver, url):
 
 
 class AvitoParser:
-    def __init__(self, url, filter="svobodnogo_naznacheniya", driver_version="122.0.6261.95"):
+    def __init__(self, url):
         # avito.ru page:
         self.url = url
         # data with ads info:
@@ -62,7 +38,7 @@ class AvitoParser:
 
     def get_data(self, url):
         # create web-driver:
-        driver = create_driver(proxy=False)
+        driver = create_driver()
         # parse links with ads:
         get_requests(driver=driver, url=url)
         time.sleep(15)
@@ -70,7 +46,7 @@ class AvitoParser:
         page_soup = BeautifulSoup(page_html, "html.parser")
         # parse links:
         links_content = page_soup.find_all("a", attrs={"data-marker": "item-title"})
-        links = [f"https://www.avito.ru" + link["href"] for link in links_content if self.filter[0] not in link]
+        links = [f"https://www.avito.ru" + link["href"] for link in links_content if self.filter not in link]
         # parse ads:
         for i in range(len(links)):
             get_requests(driver=driver, url=links[i])
@@ -108,7 +84,7 @@ class AvitoParser:
 
     def start_parse(self):
         # parse paginator:
-        driver = create_driver(proxy=False)
+        driver = create_driver()
         self.paginator = get_paginator(
             driver=driver,
             url=f"{self.url}{1}"
@@ -148,23 +124,7 @@ class AvitoParser:
         return empty_pages
 
 
-def check_empty_files(directory):
-    empty_files = []
-    files = os.listdir(directory)
-    for file in files:
-        with open(os.path.join(directory, file),
-                  mode="r", encoding="utf-8") as csv_file:
-            csv_reader = csv.reader(csv_file)
-            rows = list(csv_reader)
-            if len(rows) == 0:
-                empty_files.append(file.split(".")[0][-1])
-            else:
-                print("[+] file not empty")
-
-    return empty_files
-
-
-url_page = AVITO_URLS[1]
+url_page = AVITO_URLS["kommercheskaya"]
 parser = AvitoParser(url=url_page)
-parser.restart_parse()
+parser.start_parse()
 

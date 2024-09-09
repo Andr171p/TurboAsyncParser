@@ -30,9 +30,15 @@ class Critical:
     # this function return area of sector --> float:
     async def get_area(self):
         try:
-            content = self.soup.find("li", attrs={"class": "params-paramsList__item-_2Y2O"})
-            area = find_numbers(replace_symbol(content.text).replace(" ", ""))
-            self.elements.append(float(area[0]))
+            try:
+                content = self.soup.find("li", attrs={"class": "params-paramsList__item-_2Y2O"})
+                area = find_numbers(replace_symbol(content.text).replace(" ", ""))[0]
+            except Exception as _ex:
+                print(_ex)
+                content = self.soup.find_all("ul", attrs={"class": "params-paramsList-_awNW"})
+                area = find_numbers(content[0].text)[0]
+
+            self.elements.append(float(area))
         except Exception as _ex:
             print(f"Объявдение снято с публикации: {_ex}")
             self.elements.append(None)

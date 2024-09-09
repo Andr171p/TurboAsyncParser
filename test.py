@@ -22,18 +22,11 @@ def create_driver(proxy=False):
     return driver
 
 
-'''driver = create_driver()
-driver.get("https://tyumen.cian.ru/sale/commercial/301637654/")
+driver = create_driver()
+driver.get("https://www.sova72.ru/nedvizhimost/dom/277634")
 driver.implicitly_wait(10)
 html = driver.page_source
 soup = BeautifulSoup(html, "html.parser")
 
-content = soup.find("span", attrs={"style": "letter-spacing:-0.2px"})
-area = find_numbers(replace_symbol(content.text).replace(" ", ""))'''
-area = ['1', '9']
-print(float(".".join(area)))
-
-
-
-
-
+content = soup.find("p")
+print(content.text)
