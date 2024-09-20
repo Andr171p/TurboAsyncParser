@@ -1,6 +1,4 @@
-import os
 import time
-import csv
 
 import asyncio
 import threading
@@ -12,7 +10,7 @@ from webdriver.driver import create_driver, get_requests
 from sites.sova.html_scraping import Critical, Additional
 from sites.sova.config import get_csv_file_name
 
-from utils.preprocessing_data import data_to_csv, check_empty_files
+from misc.utils import data_to_csv, check_empty_files
 
 
 def get_soup(driver):
@@ -26,7 +24,7 @@ def get_paginator(driver, url):
     get_requests(driver=driver, url=url)
     time.sleep(10)
     soup = get_soup(driver=driver)
-    paginator = soup.find("div", attrs={"data-newurl": "/kupit/kommercheskaya/proiz-vo--baza--ferma"})
+    paginator = soup.find("div", attrs={"parse-newurl": "/kupit/kommercheskaya/proiz-vo--baza--ferma"})
 
     return int(paginator.text.split("\n")[-3])
 
@@ -48,7 +46,7 @@ class SovaParser:
     def __init__(self, url):
         # sova72.ru page:
         self.url = url
-        # data with ads info:
+        # parse with ads info:
         self.data = []
         # count of pages:
         self.paginator = None
@@ -73,11 +71,11 @@ class SovaParser:
             )
             time.sleep(5)
             soup = get_soup(driver=driver)
-            # critical ads data:
+            # critical ads parse:
             critical = Critical(soup=soup, url_list=links)
             asyncio.run(critical.parse_html(iterator=i))
             critical_data = critical.elements
-            # additional ads data:
+            # additional ads parse:
             additional = Additional(soup=soup)
             asyncio.run(additional.parse_html())
             additional_data = additional.elements

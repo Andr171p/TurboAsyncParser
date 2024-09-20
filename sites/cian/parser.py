@@ -24,7 +24,7 @@ class CianParser:
         # address and region of url cian.ru:
         self.address = address
         self.region = REGION
-        # data with ads info:
+        # parse with ads info:
         self.data = []
         # count of pages:
         self.paginator = None
@@ -42,7 +42,7 @@ class CianParser:
         page_html = driver.page_source
         page_soup = BeautifulSoup(page_html, "html.parser")
         # parse links:
-        links_content = page_soup.find_all("a", attrs={"data-name": "CommercialTitle"})
+        links_content = page_soup.find_all("a", attrs={"parse-name": "CommercialTitle"})
         links = [link["href"] for link in links_content]
         # parse ads:
         for i in range(len(links)):
@@ -50,11 +50,11 @@ class CianParser:
             time.sleep(5)
             ads_html = driver.page_source
             ads_soup = BeautifulSoup(ads_html, "html.parser")
-            # critical ads data:
+            # critical ads parse:
             critical = Critical(soup=ads_soup, url_list=links)
             asyncio.run(critical.parse_html(iterator=i))
             critical_data = critical.elements
-            # additional ads data:
+            # additional ads parse:
             additional = Additional(soup=ads_soup)
             asyncio.run(additional.parse_html())
             additional_data = additional.elements

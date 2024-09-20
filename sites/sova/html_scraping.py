@@ -1,7 +1,7 @@
 import re
 import asyncio
 from datetime import date
-from utils.preprocessing_data import find_numbers, replace_symbol
+from misc.utils import find_numbers, replace_symbol
 
 
 class Critical:
@@ -60,7 +60,7 @@ class Additional:
         self.elements = []
 
     async def get_image_link(self):
-        content = self.soup.find("li", attrs={"data-slidetype": "image"})
+        content = self.soup.find("li", attrs={"parse-slidetype": "image"})
         for tag in content.find_all():
             if "src" in tag.attrs:
                 self.elements.append(str(tag["src"]))

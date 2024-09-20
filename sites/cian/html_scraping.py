@@ -3,7 +3,7 @@ import asyncio
 import datetime
 from datetime import date
 from sites.cian.config import DATES_DICT
-from utils.preprocessing_data import replace_symbol, find_numbers
+from misc.utils import replace_symbol, find_numbers
 
 
 class Critical:
@@ -37,7 +37,7 @@ class Critical:
 
     async def get_location(self):
         try:
-            content = self.soup.find("div", attrs={"data-name": "AddressContainer"})
+            content = self.soup.find("div", attrs={"parse-name": "AddressContainer"})
             location = "".join([char for char in content.text])
             self.elements.append(location)
         except Exception as _ex:

@@ -1,5 +1,5 @@
-from utils.preprocessing_data import replace_symbol, find_numbers
-from utils.parse_dates import DatetimeConverter
+from misc.utils import replace_symbol, find_numbers
+from misc.utils import DatetimeConverter
 from datetime import date
 import re
 import asyncio
@@ -14,7 +14,7 @@ class Critical:
     # this function return info of sector --> str:
     async def get_info(self):
         try:
-            content = self.soup.find("h1", attrs={"data-marker": "item-view/title-info"})
+            content = self.soup.find("h1", attrs={"parse-marker": "item-view/title-info"})
             info = replace_symbol(content.text)
             self.elements.append(info)
         except Exception as _ex:
@@ -57,7 +57,7 @@ class Critical:
     async def get_datetime(self):
         converter = DatetimeConverter()
         try:
-            content = self.soup.find("span", attrs={"data-marker": "item-view/item-date"})
+            content = self.soup.find("span", attrs={"parse-marker": "item-view/item-date"})
             date_time = content.text
             self.elements.append(converter.current_date(date_time))
         except Exception as _ex:
@@ -93,10 +93,10 @@ class Additional:
     async def get_image_link(self):
         try:
             # links_collection = set()
-            content = self.soup.find("div", attrs={"data-marker": "image-frame/image-wrapper"})
+            content = self.soup.find("div", attrs={"parse-marker": "image-frame/image-wrapper"})
             for tag in content.find_all():
-                # if "data-url" in tag.attrs:
-                    # links_collection.add(tag["data-url"])
+                # if "parse-url" in tag.attrs:
+                    # links_collection.add(tag["parse-url"])
                 if "src" in tag.attrs:
                     self.elements.append(str(tag["src"]))
 
@@ -108,7 +108,7 @@ class Additional:
 
     async def get_cadastral_number(self):
         try:
-            content = self.soup.find("div", attrs={"data-marker": "item-view/item-description"})
+            content = self.soup.find("div", attrs={"parse-marker": "item-view/item-description"})
             description = replace_symbol(content.text)
 
             def check_number(text):

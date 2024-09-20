@@ -8,21 +8,19 @@ import time
 from loguru import logger
 
 
-class ChromeWebDriverSession:
-    page_config: str = PageConfig.ACCESS_IS_LIMITED
-    timeout: int = PageConfig.ERROR_TIMEOUT
-    logger_messages: LogerMessages
-
-    def __init__(self, driver: ChromeWebDriver.driver) -> None:
-        self.driver = driver
+class ChromeWebDriverSession(ChromeWebDriver):
+    page_config = PageConfig.ACCESS_IS_LIMITED
+    timeout = PageConfig.ERROR_TIMEOUT
 
     def open(self, url: str) -> None:
         self.driver.get(url)
-        if self.page_config in self.driver.title():
+        time.sleep(10)
+        if self.page_config in self.driver.title:
             time.sleep(self.timeout)
             raise Exception("Перезапуск из-за блокировки по IP...")
-        logger.info(self.logger_messages.SUCCESSFUL_PAGE_LOAD)
+        logger.info(LogerMessages.SUCCESSFUL_PAGE_LOAD)
 
     def close(self) -> None:
-        self.driver.quit()
         self.driver.close()
+        self.driver.quit()
+

@@ -1,10 +1,10 @@
-from avito.source.data.ads import HTMLDataParser
+from avito.source.parse.ads import HTMLADSParser
 
 
 class GetADSData:
     ads = {}
 
-    def __init__(self, dataParser: HTMLDataParser) -> None:
+    def __init__(self, dataParser: HTMLADSParser) -> None:
         self.dataParser = dataParser
 
     async def parse(self, url: str) -> dict:

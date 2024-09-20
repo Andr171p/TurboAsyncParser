@@ -3,14 +3,18 @@ from avito.source.html import HTMLSource
 from settings.logs import LogerMessages
 from settings.network import NetworkConfig
 
-from utils import (
+from misc.utils import (
     clean_text,
     extract_number,
     find_cadastral_number
 )
 
+from typing import List
 
-class HTMLDataParser(HTMLSource):
+from loguru import logger
+
+
+class HTMLADSParser(HTMLSource):
     async def info(self) -> str:
         try:
             html = self.soup.find(
@@ -20,9 +24,10 @@ class HTMLDataParser(HTMLSource):
                 }
             )
             info = html.text
+            logger.info(f"ИНФОРМАЦИЯ: {info}")
             return info
         except Exception as _ex:
-            self.logger.warning(_ex)
+            logger.warning(_ex)
             return "Не указан"
 
     async def price(self) -> int:
@@ -33,6 +38,7 @@ class HTMLDataParser(HTMLSource):
             }
         )
         price = int(extract_number(text=html.text))
+        logger.info(f"ЦЕНА: {price}")
         return price
 
     async def area(self) -> float:
@@ -46,7 +52,7 @@ class HTMLDataParser(HTMLSource):
                 )
                 area = float(extract_number(text=html.text))
             except Exception as _ex:
-                self.logger.info(_ex)
+                logger.info(_ex)
                 html = self.soup.find(
                     name="ul",
                     attrs={
@@ -54,10 +60,11 @@ class HTMLDataParser(HTMLSource):
                     }
                 )
                 area = float(extract_number(text=html[0].text))
+            logger.info(f"ПЛОЩАДЬ: {area}")
             return area
         except Exception as _ex:
-            self.logger.warning(_ex)
-            self.logger.info(LogerMessages.NOT_ACTUAL_ADS)
+            logger.warning(_ex)
+            logger.info(LogerMessages.NOT_ACTUAL_ADS)
             return 0
 
     async def location(self) -> str:
@@ -69,9 +76,10 @@ class HTMLDataParser(HTMLSource):
                 }
             )
             location = clean_text(text=html.text)
+            logger.info(f"АДРЕС: {location}")
             return location
         except Exception as _ex:
-            self.logger.warning(_ex)
+            logger.warning(_ex)
             return "Не указан"
 
     async def datetime(self) -> str:
@@ -83,12 +91,13 @@ class HTMLDataParser(HTMLSource):
                 }
             )
             datetime = html.text
+            logger.info(f"ДАТА ПУБЛИКАЦИИ: {datetime}")
             return datetime
         except Exception as _ex:
-            self.logger.warning(_ex)
+            logger.warning(_ex)
             return "Не указан"
 
-    async def image(self) -> list:
+    async def image(self) -> List[str] | list:
         urls = []
         try:
             html = self.soup.find(
@@ -100,10 +109,11 @@ class HTMLDataParser(HTMLSource):
             for tag in html.find_all():
                 if "src" in tag.attrs:
                     urls.append(str(tag["src"]))
+            logger.info(f"URL ИЗОБРАЖЕНИЙ: {urls}")
             return urls
         except Exception as _ex:
-            self.logger.warning(_ex)
-            self.logger.warning(LogerMessages.NOT_ACTUAL_ADS)
+            logger.warning(_ex)
+            logger.warning(LogerMessages.NOT_ACTUAL_ADS)
             empty = []
             return empty
 
@@ -116,6 +126,7 @@ class HTMLDataParser(HTMLSource):
         )
         text = clean_text(text=html.text)
         cadastral = find_cadastral_number(text=text)
+        logger.info(f"КАДАСТРОВЫЙ НОМЕР: {cadastral}")
         return cadastral
 
     async def text(self) -> str:
@@ -126,9 +137,11 @@ class HTMLDataParser(HTMLSource):
             }
         )
         text = clean_text(text=html.text)
+        logger.info(f"ОПИСАНИЕ: {text}")
         return text
 
     @staticmethod
-    async def source(url: str) -> list:
+    async def source(url: str) -> List[str]:
         source = [url, NetworkConfig.SOURCE_NAME]
+        logger.info(f"ИСТОЧНИК: {source}")
         return source

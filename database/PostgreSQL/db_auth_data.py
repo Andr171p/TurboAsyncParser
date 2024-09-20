@@ -1,5 +1,0 @@
-host = "monorail.proxy.rlwy.net"
-user = "postgres"
-password = "oklNXvawdATGqbEvjIxprKTNRWrWEHSn"
-db_name = "postgres"
-port = "16488"

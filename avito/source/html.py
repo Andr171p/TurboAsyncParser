@@ -4,12 +4,11 @@ from webdriver.driver import ChromeWebDriver
 
 
 class HTMLSource:
-    from loguru import logger
-
     def __init__(
             self, driver: ChromeWebDriver.driver
     ) -> None:
-        self.html = driver.page_source
+        self.element = driver.find_element("xpath", "//*")
+        self.html = self.element.get_attribute("outerHTML")
         self.soup = BeautifulSoup(
             self.html,
             "html.parser"

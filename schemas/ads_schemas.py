@@ -1,5 +1,7 @@
 from pydantic import BaseModel
 
+from typing import List
+
 
 class ADSSchema(BaseModel):
     info: str
@@ -7,6 +9,6 @@ class ADSSchema(BaseModel):
     area: float
     location: str
     datetime: str
-    image: list
+    image: List[str]
     cadastral: str
-    source: list
+    source: List[str]
